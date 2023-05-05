@@ -9,6 +9,7 @@ import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.android.play.core.review.ReviewInfo;
 import com.google.android.play.core.tasks.Task;
 import com.facebook.react.bridge.ReactApplicationContext;
+import android.app.Activity;
 
 public class StoreReviewModuleImpl {
 
