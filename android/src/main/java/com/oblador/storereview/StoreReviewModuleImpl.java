@@ -18,9 +18,18 @@ public class StoreReviewModuleImpl {
         ReviewManager manager = ReviewManagerFactory.create(context);
         Task<ReviewInfo> request = manager.requestReviewFlow();
         request.addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
+            if (task.isSuccessful()) {
+                ReviewInfo reviewInfo = task.getResult();
+                Activity currentActivity = context.getCurrentActivity();
+                if (currentActivity != null) {
+                    Task<Void> flow = manager.launchReviewFlow(currentActivity, reviewInfo);
+                } else {
+                    Log.w(NAME, "Current activity is null, cannot launch review flow");
+                }
+            } else {
                 Log.w(NAME, "Requesting review failed");
             }
+
         });
     }
 
